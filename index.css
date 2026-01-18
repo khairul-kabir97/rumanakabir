@@ -1,0 +1,249 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow-x: hidden;
+    padding: 10px;
+    background: #000;
+}
+
+/* Background Slideshow */
+.bg-slideshow {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 2.5s ease-in-out, transform 5s ease-in-out, filter 5s ease-in-out;
+    transform: scale(1);
+    filter: blur(0px);
+}
+
+.bg-slide.active {
+    opacity: 1;
+    transform: scale(1.07);
+    filter: blur(1px);
+}
+
+/* Dark overlay */
+.bg-slideshow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* Card */
+.card {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(7px);
+    padding: 20px 15px;
+    border-radius: 25px;
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 2s ease forwards;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 1.7rem;
+    margin-bottom: 12px;
+    text-shadow: 0 0 12px #ff4d6d;
+    animation: textFade 2s ease forwards;
+}
+
+p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    animation: textFade 2.5s ease forwards;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    background: #ff4d6d;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 5px 3px;
+    transition: 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #ff1e4d;
+}
+
+.music-btn {
+    background: #6a4cff;
+}
+
+.music-btn:hover {
+    background: #4b2cff;
+}
+
+.hidden-message {
+    display: none;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #ffdce0;
+    text-align: left;
+    animation: textFade 2s ease forwards;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    font-size: 18px;
+    color: rgba(255, 77, 109, 0.7);
+    animation: float linear infinite;
+}
+
+/* Heart explosion full screen */
+.heart-explosion {
+    animation: explode 1.5s forwards;
+    position: absolute;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.5) translate(0, 0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5) translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive tweaks */
+
+/* Small phones (<400px) */
+@media (max-width: 400px) {
+    .card {
+        padding: 18px 12px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    p,
+    .hidden-message {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    button {
+        width: 100%;
+        font-size: 0.85rem;
+        padding: 10px 0;
+        margin: 6px 0;
+    }
+}
+
+/* Medium phones (400px-768px) */
+@media (min-width: 401px) and (max-width: 768px) {
+    .card {
+        max-width: 360px;
+        padding: 20px 15px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    p,
+    .hidden-message {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablets and larger screens */
+@media (min-width: 769px) {
+    .card {
+        max-width: 420px;
+    }
+
+    h1 {
+        font-size: 2.3rem;
+    }
+
+    p,
+    .hidden-message {
+        font-size: 1.05rem;
+    }
+}
