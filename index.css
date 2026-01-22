@@ -1,153 +1,160 @@
-/* Reset & Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: "Segoe UI", sans-serif;
 }
 
 body {
     min-height: 100vh;
+    background: url('img1.jpg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    padding: 12px;
     overflow-x: hidden;
-    padding: 10px;
-    background: #000;
+    color: #eafff2;
+    transition: background 1s ease;
 }
 
-/* Background Slideshow */
-.bg-slideshow {
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    overflow: hidden;
-}
-
-.bg-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 2.5s ease-in-out, transform 5s ease-in-out, filter 5s ease-in-out;
-    transform: scale(1);
-    filter: blur(0px);
-}
-
-.bg-slide.active {
-    opacity: 1;
-    transform: scale(1.07);
-    filter: blur(1px);
-}
-
-/* Dark overlay */
-.bg-slideshow::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-    pointer-events: none;
-    z-index: -2;
-}
-
-/* Card */
-.card {
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(7px);
-    padding: 20px 15px;
-    border-radius: 25px;
-    text-align: center;
+/* Container */
+.container {
+    max-width: 95vw;
     width: 100%;
-    max-width: 380px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    animation: fadeIn 2s ease forwards;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.35), 0 0 60px rgba(0, 255, 170, 0.15);
     position: relative;
-    z-index: 1;
+    transition: box-shadow 1s ease;
 }
 
-h1 {
-    font-size: 1.7rem;
-    margin-bottom: 12px;
-    text-shadow: 0 0 12px #ff4d6d;
-    animation: textFade 2s ease forwards;
+/* Date & Title */
+.date {
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 10px;
 }
 
-p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+.title {
+    text-align: center;
     margin-bottom: 18px;
-    animation: textFade 2.5s ease forwards;
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    text-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
 }
 
-button {
-    padding: 10px 20px;
-    border-radius: 30px;
+/* Surprise Letter */
+.letter {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    line-height: 1.8;
+    white-space: pre-line;
+    min-height: 180px;
+}
+
+/* Signature & Forever */
+.signature {
+    margin-top: 18px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.forever {
+    margin-top: 12px;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    text-align: center;
+    opacity: 0;
+    color: #ffb6d9;
+    text-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+    transition: opacity 3s ease;
+}
+
+/* Buttons */
+.music-btn,
+.surprise-btn {
     border: none;
-    background: #ff4d6d;
-    color: #fff;
     cursor: pointer;
-    font-size: 0.9rem;
-    margin: 5px 3px;
+    border-radius: 20px;
     transition: 0.3s;
-    position: relative;
-    z-index: 2;
-}
-
-button:hover {
-    transform: scale(1.05);
-    background: #ff1e4d;
 }
 
 .music-btn {
-    background: #6a4cff;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 10;
 }
 
-.music-btn:hover {
-    background: #4b2cff;
+.surprise-btn {
+    width: 100%;
+    padding: 12px 0;
+    margin: 10px 0;
+    background: #ff4d6d;
+    color: #fff;
+    font-size: 1rem;
 }
 
-.hidden-message {
-    display: none;
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #ffdce0;
-    text-align: left;
-    animation: textFade 2s ease forwards;
+.surprise-btn:hover {
+    transform: scale(1.05);
 }
 
 /* Floating Hearts */
 .heart {
-    position: absolute;
-    font-size: 18px;
-    color: rgba(255, 77, 109, 0.7);
-    animation: float linear infinite;
-}
-
-/* Heart explosion full screen */
-.heart-explosion {
-    animation: explode 1.5s forwards;
-    position: absolute;
-    font-size: 18px;
-    pointer-events: none;
-}
-
-@keyframes explode {
-    0% {
-        transform: scale(0.5) translate(0, 0);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(2.5) translate(var(--x), var(--y));
-        opacity: 0;
-    }
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 6s linear forwards;
+    opacity: 0.8;
 }
 
 @keyframes float {
     0% {
-        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Night Glow */
+body.night .container {
+    box-shadow: 0 0 70px rgba(0, 255, 170, 0.7), 0 0 120px rgba(0, 255, 170, 0.3);
+}
+
+/* Sparkles */
+#sparkles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #eafff2;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sparkleAnim 3s linear infinite;
+}
+
+@keyframes sparkleAnim {
+    0% {
+        transform: translateY(0) scale(0.5);
         opacity: 0;
     }
 
@@ -156,94 +163,25 @@ button:hover {
     }
 
     100% {
-        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        transform: translateY(-100vh) scale(1);
         opacity: 0;
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes textFade {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive tweaks */
-
-/* Small phones (<400px) */
-@media (max-width: 400px) {
-    .card {
-        padding: 18px 12px;
-    }
-
-    h1 {
+/* Responsive */
+@media (max-width:600px) {
+    .title {
         font-size: 1.5rem;
     }
 
-    p,
-    .hidden-message {
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    button {
-        width: 100%;
-        font-size: 0.85rem;
-        padding: 10px 0;
-        margin: 6px 0;
+    .letter {
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 }
 
-/* Medium phones (400px-768px) */
-@media (min-width: 401px) and (max-width: 768px) {
-    .card {
-        max-width: 360px;
-        padding: 20px 15px;
-    }
-
-    h1 {
-        font-size: 1.6rem;
-    }
-
-    p,
-    .hidden-message {
-        font-size: 0.9rem;
-    }
-
-    button {
-        font-size: 0.9rem;
-    }
-}
-
-/* Tablets and larger screens */
-@media (min-width: 769px) {
-    .card {
-        max-width: 420px;
-    }
-
-    h1 {
-        font-size: 2.3rem;
-    }
-
-    p,
-    .hidden-message {
-        font-size: 1.05rem;
+@media (max-width:400px) {
+    .container {
+        padding: 14px;
     }
 }

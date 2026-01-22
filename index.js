@@ -1,104 +1,66 @@
+const text = `
+আজ আমাদের বিয়ের সাত মাস পূর্ণ হলো। সময়টা ক্যালেন্ডারে হয়তো খুব দীর্ঘ নয়, কিন্তু অনুভূতিতে মনে হয়—আমরা যেন সাতটা ঋতু একসঙ্গে পেরিয়ে এসেছি। এই সাত মাস আমাকে শিখিয়েছে, ভালোবাসা শুধু হাসি আর আনন্দের নাম নয়; ভালোবাসা মানে একে অপরের নীরবতাকে বুঝে নেওয়া, ক্লান্ত দিনে নিঃশব্দে পাশে থাকা, আর ছোট ছোট মুহূর্তের ভেতর লুকিয়ে থাকা বড় সুখ খুঁজে পাওয়া।
+
+তুমি আমার জীবনে আসার পর থেকে সবকিছু যেন একটু ধীরে, একটু গভীর, একটু বেশি সুন্দর হয়ে উঠেছে। সকালে ঘুম ভাঙার আগেই তোমার কথা মনে পড়ে, আর রাতে ঘুমোবার আগে তোমার নামটাই আমার শেষ অনুভূতি হয়ে থাকে। তোমার হাসিতে আমার দুশ্চিন্তা গলে যায়, তোমার চোখে আমি খুঁজে পাই নিরাপত্তা আর নিশ্চিন্তি। তুমি পাশে থাকলেই পৃথিবীটা সহজ মনে হয়।
+
+এই সাত মাসে আমরা অনেক কথা বলেছি, আবার কিছু না-বলা অনুভূতিও জমেছে—কিন্তু প্রতিটা অনুভূতির ভেতরেই ছিল বিশ্বাস, শ্রদ্ধা আর একে অপরকে আগলে রাখার ইচ্ছে। তুমি আমাকে প্রতিদিন একটু একটু করে আরও ভালো মানুষ হতে শিখিয়েছ, আরও দায়িত্বশীল হতে শিখেছ।
+
+আজ এই বিশেষ দিনে শুধু এটুকুই বলতে চাই—আমি তোমার সঙ্গেই বাকি সব মাস, সব বছর কাটাতে চাই। সুখে-দুঃখে, আলো-ছায়ায়, হাত ধরে একই পথে হাঁটতে চাই শুধু তোমার সঙ্গে। তুমি আমার জীবন, আমার শান্তি, আমার সবচেয়ে গভীর ভালোবাসা। 💚
+`;
+
+const letterEl = document.getElementById("letter");
+const signature = document.getElementById("signature");
+const forever = document.getElementById("forever");
 const music = document.getElementById("bgMusic");
-let isPlaying = false;
+const sparkles = document.getElementById("sparkles");
 
-/* 🎁 Surprise */
-function showLove() {
-    document.getElementById("loveMessage").style.display = "block";
-    document.getElementById("surpriseBtn").style.display = "none";
+let i = 0;
 
-    createHeartExplosion(40); // Full screen heart burst (mobile optimized)
+function showLetter() {
+    document.querySelector(".surprise-btn").style.display = "none";
+    typeWriter();
+}
 
-    if (!isPlaying) {
-        music.play().catch(() => { });
-        isPlaying = true;
+function typeWriter() {
+    if (i < text.length) {
+        letterEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 28);
+    } else {
+        signature.style.opacity = 1;
+        setTimeout(() => forever.style.opacity = 1, 1500);
     }
 }
 
-/* 🎶 Music toggle */
+/* Music toggle */
 function toggleMusic() {
+    const btn = document.querySelector(".music-btn");
     if (music.paused) {
         music.play();
+        btn.innerText = "⏸ Music";
     } else {
         music.pause();
+        btn.innerText = "🎶 Music";
     }
-    isPlaying = !music.paused;
 }
 
-/* ❤️ Floating hearts */
-function createHeart() {
+/* Floating Hearts */
+setInterval(() => {
     const heart = document.createElement("div");
     heart.className = "heart";
-    heart.innerHTML = "❤";
-
-    const colors = ["#ff4d6d", "#ff69b4", "#ff85a2", "#ffd1dc"];
-    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-    // Responsive random position
-    const vw = Math.min(window.innerWidth, 400); // Small phones
-    heart.style.left = Math.random() * vw + "px";
-
-    const fontSize = Math.random() * 15 + 12; // smaller for mobile
-    heart.style.fontSize = fontSize + "px";
-
-    const duration = 4 + Math.random() * 3;
-    heart.style.animationDuration = duration + "s";
-
+    heart.innerText = "💚";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = 16 + Math.random() * 20 + "px";
     document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 900);
 
-    setTimeout(() => heart.remove(), duration * 1000);
-}
-
-// Floating hearts interval
-setInterval(createHeart, 600);
-
-/* 🌄 Background slideshow */
-const bgImages = ["img.jpg", "bg2.jpg", "bg3.jpg", "bg4.jpg"];
-const slides = document.querySelectorAll(".bg-slide");
-let bgIndex = 0;
-
-slides.forEach((slide, i) => {
-    slide.style.backgroundImage = `url(${bgImages[i]})`;
-});
-
+/* Sparkles */
 setInterval(() => {
-    slides[bgIndex].classList.remove("active");
-    bgIndex = (bgIndex + 1) % slides.length;
-    slides[bgIndex].classList.add("active");
-}, 5000);
-
-/* ❤️ Heart explosion full screen */
-function createHeartExplosion(count) {
-    for (let i = 0; i < count; i++) {
-        const heart = document.createElement("div");
-        heart.className = "heart-explosion";
-        heart.innerHTML = "❤";
-
-        // Responsive explosion coordinates
-        const xRange = window.innerWidth / 2; // prevent overflow small screens
-        const yRange = window.innerHeight / 2;
-
-        const x = (Math.random() - 0.5) * xRange + "px";
-        const y = (Math.random() - 0.5) * yRange + "px";
-
-        heart.style.setProperty("--x", x);
-        heart.style.setProperty("--y", y);
-
-        const colors = ["#ff4d6d", "#ff69b4", "#ff85a2", "#ffd1dc"];
-        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-
-        const fontSize = Math.random() * 20 + 12;
-        heart.style.fontSize = fontSize + "px";
-
-        // Start from center
-        heart.style.left = "50%";
-        heart.style.top = "50%";
-
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1500);
-    }
-}
-
-// Optional: Adjust hearts on window resize
-window.addEventListener("resize", () => {
-    // ensures small screens hearts scale properly
-});
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = Math.random() * window.innerWidth + "px";
+    sparkle.style.top = Math.random() * window.innerHeight + "px";
+    sparkles.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 3000);
+}, 400);
