@@ -5,168 +5,244 @@
     font-family: "Segoe UI", sans-serif;
 }
 
+
+/* Slideshow */
+.slideshow {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+}
+
+.slideshow img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 2.5s ease;
+}
+
+.slideshow img.active {
+    opacity: 1;
+}
+
+
 body {
     min-height: 100vh;
-    background: url('img1.jpg') no-repeat center center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
-    overflow-x: hidden;
+    padding: 14px;
     color: #eafff2;
-    transition: background 1s ease;
+}
+
+
+body.night {
+    background: #000;
+}
+
+body.day {
+    background: #f7f7f7;
+    color: #222;
 }
 
 /* Container */
 .container {
-    max-width: 95vw;
     width: 100%;
-    padding: 20px;
-    border-radius: 20px;
+    max-width: 700px;
+    padding: 22px;
+    border-radius: 22px;
     background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 30px rgba(0, 255, 170, 0.35), 0 0 60px rgba(0, 255, 170, 0.15);
-    position: relative;
-    transition: box-shadow 1s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 60px rgba(0, 255, 170, 0.5);
+    animation: fadeIn 1.5s ease;
 }
 
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* Date & Title */
+
+.title {
+    text-align: center;
+    font-size: clamp(1.6rem, 5vw, 2.1rem);
+    margin-bottom: 14px;
+    text-shadow: 0 0 15px rgba(0, 255, 170, 0.7);
+}
+
 .date {
     text-align: center;
     font-size: 0.85rem;
     opacity: 0.8;
-    margin-bottom: 10px;
 }
 
-.title {
-    text-align: center;
-    margin-bottom: 18px;
-    font-size: clamp(1.4rem, 5vw, 2rem);
-    text-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
-}
 
-/* Surprise Letter */
+/* Letter */
 .letter {
-    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    margin-top: 16px;
     line-height: 1.8;
-    white-space: pre-line;
     min-height: 180px;
+    white-space: pre-line;
 }
 
-/* Signature & Forever */
-.signature {
-    margin-top: 18px;
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    opacity: 0;
-    transition: opacity 2s ease;
-}
-
-.forever {
-    margin-top: 12px;
-    font-size: clamp(1rem, 3vw, 1.4rem);
-    text-align: center;
-    opacity: 0;
-    color: #ffb6d9;
-    text-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
-    transition: opacity 3s ease;
-}
 
 /* Buttons */
-.music-btn,
-.surprise-btn {
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-
-.music-btn {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    padding: 8px 14px;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    z-index: 10;
-}
-
 .surprise-btn {
     width: 100%;
-    padding: 12px 0;
-    margin: 10px 0;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
     background: #ff4d6d;
     color: #fff;
-    font-size: 1rem;
+    cursor: pointer;
+    transition: transform .3s;
 }
 
 .surprise-btn:hover {
     transform: scale(1.05);
 }
 
-/* Floating Hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 20px;
-    animation: float 6s linear forwards;
-    opacity: 0.8;
+.surprise-btn.alt {
+    background: #6a4cff;
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0) scale(0.6);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-110vh) scale(1.2);
-        opacity: 0;
-    }
+.back-btn {
+    display: none;
+    margin-top: 18px;
+    padding: 10px;
+    border-radius: 18px;
+    border: none;
+    background: #00c896;
+    color: #fff;
+    cursor: pointer;
 }
 
-/* Night Glow */
-body.night .container {
-    box-shadow: 0 0 70px rgba(0, 255, 170, 0.7), 0 0 120px rgba(0, 255, 170, 0.3);
+/* Signature */
+.signature,
+.forever {
+    opacity: 0;
+    text-align: center;
+    margin-top: 14px;
+    transition: opacity 2s ease;
 }
+
+.forever {
+    font-size: 1.3rem;
+    color: #ffb6d9;
+}
+
+
 
 /* Sparkles */
-#sparkles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 5;
-}
-
 .sparkle {
     position: absolute;
     width: 4px;
     height: 4px;
     background: #eafff2;
     border-radius: 50%;
-    opacity: 0.8;
-    animation: sparkleAnim 3s linear infinite;
+    animation: sparkle 3s linear infinite;
 }
 
-@keyframes sparkleAnim {
-    0% {
-        transform: translateY(0) scale(0.5);
+@keyframes sparkle {
+    from {
+        transform: translateY(0);
         opacity: 0;
     }
 
-    50% {
+    to {
+        transform: translateY(-100vh);
+        opacity: 1;
+    }
+}
+
+
+
+/* Countdown */
+.countdown {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
+    gap: 8px;
+}
+
+.countdown div {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 8px 4px;
+    text-align: center;
+    box-shadow: inset 0 0 10px rgba(0, 255, 170, 0.2);
+}
+
+.countdown span {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #aaffdd;
+}
+
+.countdown small {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}
+
+/* Song Selector */
+.song-box {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.song-title {
+    margin-bottom: 8px;
+    opacity: 0.85;
+}
+
+.song-box button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.song-box button.active {
+    background: #00c896;
+    color: #fff;
+    box-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
+}
+
+
+@keyframes float {
+    from {
+        transform: translateY(0);
         opacity: 1;
     }
 
-    100% {
-        transform: translateY(-100vh) scale(1);
+    to {
+        transform: translateY(-110vh);
         opacity: 0;
     }
 }
+
+
 
 /* Responsive */
 @media (max-width:600px) {
