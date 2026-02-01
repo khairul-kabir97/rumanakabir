@@ -10,12 +10,8 @@
 
 <body class="night">
 
-
     <!-- Background Music -->
-    <audio id="bgMusic" loop>
-        <source src="song.mp3" type="audio/mpeg">
-        <source src="gaan.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgMusic" loop></audio>
 
 
     <!-- Slideshow -->
@@ -26,46 +22,64 @@
     </div>
 
 
-    <!-- Surprise Container -->
-    <div class="container ">
+    <div class="container">
         <div class="date">8 Months Anniversary Coming Soon ❤️</div>
 
 
         <!-- Countdown -->
         <div class="countdown">
-
             <div><span id="days">00</span><small>Days</small></div>
             <div><span id="hours">00</span><small>Hours</small></div>
             <div><span id="minutes">00</span><small>Minutes</small></div>
             <div><span id="seconds">00</span><small>Seconds</small></div>
-
         </div>
 
 
         <h1 class="title">প্রিয় বাতাশি 💚🌿</h1>
 
+        <!-- LETTER MENU -->
+        <button class="main-btn" onclick="toggleMenu('letterMenu')">💌 Inbox</button>
+        <button id="backBtn" class="back-btn" onclick="resetPage()">🔁 Back</button>
 
-        <!-- Song Selector -->
-        <div class="song-box">
-            <p class="song-title">🎵 Choose a song</p>
-            <button onclick="playSong('song.mp3', this)">💚 Song 1</button>
-            <button onclick="playSong('gaan.mp3', this)">🌙 Song 2</button>
+
+        <div id="letterMenu" class="submenu">
+            <button onclick="showLetter(1)">7 Months Together</button>
+            <button onclick="showLetter(2)">31 Weeks 💖</button>
+            <button onclick="showLetter(3)">32 Weeks 🌿</button>
+            <button id="month8Btn" class="locked" disabled>🔒 8 Months 💝</button>
         </div>
 
 
-        <button class="surprise-btn" onclick="showLetter(1)"> 7 Months together</button>
-        <button class="surprise-btn alt" onclick="showLetter(2)"> 31 weeks 💖</button>
-        <button id="backBtn" class="back-btn" onclick="resetPage()">🔁 Read Again</button>
+        <!-- MUSIC MENU -->
+        <button class="main-btn" onclick="toggleMenu('musicMenu')">🎵 Music</button>
+
+        <div id="musicMenu" class="submenu">
+            <button onclick="playSong('gaan.mp3', this)">💚 Song 1</button>
+            <button onclick="playSong('song.mp3', this)">🌙 Song 2</button>
+            <button onclick="playSong('song1.mp3', this)">💖 Song 3</button>
+        </div>
 
 
 
         <div id="letter" class="letter"></div>
         <div id="signature" class="signature">— তোমার পাখি 🕊️</div>
         <div id="forever" class="forever">Dear Nayantara 💌</div>
-
     </div>
 
-    <!-- Sparkles -->
+
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h3>🔐 Reserved for You 💖</h3>
+            <p>Please enter the secret key</p>
+            <input type="password" id="passInput" placeholder="Password here...">
+            <div class="modal-btns">
+                <button onclick="checkPassword()">Open</button>
+                <button onclick="closeModal()" style="background: #ff4d6d;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
     <div id="sparkles"></div>
 
     <script src="index.js"></script>

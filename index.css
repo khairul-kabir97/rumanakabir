@@ -5,6 +5,131 @@
     font-family: "Segoe UI", sans-serif;
 }
 
+/* Main Buttons */
+.main-btn {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 22px;
+    border: none;
+    font-size: 1.05rem;
+    background: linear-gradient(135deg, #ff4d6d, #6a4cff);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    margin-bottom: 12px;
+    animation: slideDown .4s ease;
+}
+
+.submenu button {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 18px;
+    border: none;
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+    cursor: pointer;
+}
+
+
+/* Modal Style */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: rgba(20, 20, 20, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #00c896;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 0 30px rgba(0, 255, 170, 0.3);
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.modal-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-btns button {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #00c896;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+
+/* Locked / Unlocked */
+.locked {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+
+
+.unlocked {
+    background: #00c896 !important;
+    box-shadow: 0 0 18px rgba(0, 255, 170, .8);
+    animation: pulse 1.5s infinite;
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 8px rgba(0, 255, 170, .5);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 255, 170, 1);
+    }
+
+    100% {
+        box-shadow: 0 0 8px rgba(0, 255, 170, .5);
+    }
+}
 
 /* Slideshow */
 .slideshow {
@@ -27,7 +152,7 @@
     opacity: 1;
 }
 
-
+/* Body */
 body {
     min-height: 100vh;
     display: flex;
@@ -36,7 +161,6 @@ body {
     padding: 14px;
     color: #eafff2;
 }
-
 
 body.night {
     background: #000;
@@ -59,7 +183,6 @@ body.day {
     animation: fadeIn 1.5s ease;
 }
 
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -72,9 +195,7 @@ body.day {
     }
 }
 
-
-/* Date & Title */
-
+/* Title & Date */
 .title {
     text-align: center;
     font-size: clamp(1.6rem, 5vw, 2.1rem);
@@ -88,36 +209,12 @@ body.day {
     opacity: 0.8;
 }
 
-
 /* Letter */
 .letter {
     margin-top: 16px;
     line-height: 1.8;
     min-height: 180px;
     white-space: pre-line;
-}
-
-
-/* Buttons */
-.surprise-btn {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 20px;
-    border: none;
-    font-size: 1rem;
-    background: #ff4d6d;
-    color: #fff;
-    cursor: pointer;
-    transition: transform .3s;
-}
-
-.surprise-btn:hover {
-    transform: scale(1.05);
-}
-
-.surprise-btn.alt {
-    background: #6a4cff;
 }
 
 .back-btn {
@@ -145,8 +242,6 @@ body.day {
     color: #ffb6d9;
 }
 
-
-
 /* Sparkles */
 .sparkle {
     position: absolute;
@@ -168,8 +263,6 @@ body.day {
         opacity: 1;
     }
 }
-
-
 
 /* Countdown */
 .countdown {
@@ -200,48 +293,22 @@ body.day {
     opacity: 0.8;
 }
 
-/* Song Selector */
-.song-box {
-    margin-top: 18px;
-    text-align: center;
-}
-
-.song-title {
-    margin-bottom: 8px;
-    opacity: 0.85;
-}
-
-.song-box button {
-    width: 100%;
-    margin: 6px 0;
-    padding: 10px;
-    border-radius: 16px;
-    border: none;
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.song-box button.active {
-    background: #00c896;
-    color: #fff;
-    box-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
-}
-
-
+/* Floating Hearts */
 @keyframes float {
-    from {
-        transform: translateY(0);
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
         opacity: 1;
     }
 
-    to {
-        transform: translateY(-110vh);
+    100% {
+        transform: translateY(-110vh) rotate(180deg);
         opacity: 0;
     }
 }
-
 
 
 /* Responsive */
