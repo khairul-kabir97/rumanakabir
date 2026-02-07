@@ -5,13 +5,27 @@
     <meta charset="UTF-8">
     <title>My Batashi 💚</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&family=Hind+Siliguri:wght@500;600&display=swap"
+        rel="stylesheet">
+
+
+
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body class="night">
 
+
+
     <!-- Background Music -->
     <audio id="bgMusic" loop></audio>
+
+    <div id="musicToggle" class="music-card" onclick="toggleMusic()">
+        <span id="musicIcon">🎵</span>
+    </div>
 
 
     <!-- Slideshow -->
@@ -19,6 +33,8 @@
         <img src="img.jpg" class="active">
         <img src="img2.jpg">
         <img src="img3.jpg">
+        <img src="img6.jpg">
+        <img src="img7.jpg">
     </div>
 
 
@@ -46,6 +62,7 @@
             <button onclick="showLetter(1)">7 Months Together</button>
             <button onclick="showLetter(2)">31 Weeks 💖</button>
             <button onclick="showLetter(3)">32 Weeks 🌿</button>
+            <button onclick="showLetter(4)">33 Weeks 💚</button>
             <button id="month8Btn" class="locked" disabled>🔒 8 Months 💝</button>
         </div>
 
@@ -55,8 +72,10 @@
 
         <div id="musicMenu" class="submenu">
             <button onclick="playSong('gaan.mp3', this)">💚 Song 1</button>
-            <button onclick="playSong('song.mp3', this)">🌙 Song 2</button>
-            <button onclick="playSong('song1.mp3', this)">💖 Song 3</button>
+            <button onclick="playSong('song.mp3', this)">🌙 Rupkothar Jogote </button>
+            <button onclick="playSong('song1.mp3', this)">💖 Ektukhani Mon</button>
+            <button onclick="playSong('song3.mp3', this)">💖 Tu Zaroori </button>
+            <button onclick="playSong('song4.mp3', this)">💖 Dil Ke Armaan </button>
         </div>
 
 
@@ -64,7 +83,24 @@
         <div id="letter" class="letter"></div>
         <div id="signature" class="signature">— তোমার পাখি 🕊️</div>
         <div id="forever" class="forever">Dear Nayantara 💌</div>
+
+
+        <footer class="footer">
+            <div class="footer-inner">
+                <div class="footer-text">
+                    Made with 💚 by <span>Khairul Kabir</span>
+                </div>
+
+                <div class="batashi-badge">
+                    🌿 Made for My-Rumana 💖
+                </div>
+            </div>
+
+            <div class="heart-rain"></div>
+        </footer>
+
     </div>
+
 
 
     <div id="passwordModal" class="modal">
@@ -81,6 +117,7 @@
 
 
     <div id="sparkles"></div>
+
 
     <script src="index.js"></script>
 </body>

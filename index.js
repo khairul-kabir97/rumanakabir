@@ -11,6 +11,15 @@ const letter3 = `প্রিয় বাতাশি 💚🌿
 চিরন্তনভাবে তোমার,
 পাখি।💚`;
 
+const letter4 = `প্রিয় বাতাশি 💚🌿
+আজ আমাদের বিবাহের ৩৩তম সপ্তাহ—আর আমার হৃদয় যেন আনন্দ, প্রতীক্ষা আর ভালোবাসার এক মধুর উন্মাদনায় ভরে আছে। অনেক দিন পরে আবার তোমার কাছে ফিরছি—এই ভাবনাটাই আমাকে ভেতর থেকে আলোড়িত করছে। প্রতিটি দিন তোমাকে ছাড়া কেটেছে, কিন্তু প্রতিটি মুহূর্তেই তুমি ছিলে আমার নিশ্বাসে, আমার স্বপ্নের গহীনে, আমার মনের মনিকোঠায়, আমার হৃদয়ের সবচেয়ে নরম কোণে।
+তোমার কাছে ফেরার এই যাত্রা যেন শুধু পথ চলা নয়—এ যেন ভালোবাসার দিকে ফিরে আসা, আত্মার টানে ঘরে ফেরা। আমি কল্পনা করি, তোমাকে আবার সামনে দেখবো—তোমার সেই চেনা মুক্তঝরা হাসি, কোমল চোখের গভীর দৃষ্টি, মায়াভরা কণ্ঠ… যেন পুরো পৃথিবী এক মুহূর্তের জন্য থমকে যাবে। তোমার পাশে দাঁড়ালেই আমার সমস্ত ক্লান্তি মিলিয়ে যায়, সমস্ত দুঃখ নিঃশব্দে ঝরে পড়ে।
+এই দূরত্ব আমাকে শিখিয়েছে—তুমি শুধু আমার স্ত্রী নও, তুমি আমার সবচেয়ে প্রিয় বন্ধু, আমার আশ্রয়, আমার শান্তির ঠিকানা। তোমার অনুপস্থিতিতে আমি আরও গভীরভাবে বুঝেছি—তুমি আমার জীবনের সবচেয়ে প্রয়োজনীয়, সবচেয়ে অমূল্য মানুষ। বাতাশি, তোমার কাছে ফিরতে পারা মানেই আমার হৃদয়ের ঘরে ফিরে যাওয়া, আমার ভালোবাসার জান্নাতে আবার প্রবেশ করা।
+আমি স্বপ্ন দেখি, তোমার সামনে দাঁড়িয়ে তোমার হাত ধরে বলবো—এই সময়ের প্রতিটি অপেক্ষা সার্থক হয়েছে, কারণ এর শেষে তুমি আছো। তোমার চোখে চোখ রেখে আমি নতুন করে প্রতিজ্ঞা করবো—যতদিন শ্বাস থাকবে, ততদিন শুধু তোমাকেই ভালোবেসে যাবো।
+তোমার কাছে ফিরে আসা মানেই আমার জীবনের সবচেয়ে সুন্দর উৎসব। ৩৩তম সপ্তাহে এসে আমার ভালোবাসা আরও গভীর, আরও নিবিড়, আরও চিরন্তন হয়ে উঠেছে।
+চিরকাল তোমার,
+পাখি।`;
+
 const letterEl = document.getElementById("letter");
 const signature = document.getElementById("signature");
 const forever = document.getElementById("forever");
@@ -31,6 +40,7 @@ function closeModal() {
     document.getElementById("passwordModal").style.display = "none";
     document.getElementById("passInput").value = "";
 }
+
 
 
 // ২. পাসওয়ার্ড চেক করার ফাংশন (এটি এখন মেনু খোলার জন্য ব্যবহৃত হবে)
@@ -69,11 +79,18 @@ function toggleMenu(id) {
 }
 
 
+let isTyping = false; // টাইপিং বাগ ঠিক করার জন্য
+let typingTimeout;
 function showLetter(n) {
-    activeText = n === 1 ? letter1 : n === 2 ? letter2 : n === 3 ? letter3 : "";
+    if (isTyping) return; // যদি টাইপিং চলছে, তাহলে নতুন লেটার দেখাবে না
+    activeText = n === 1 ? letter1 : n === 2 ? letter2 : n === 3 ? letter3 : n === 4 ? letter4 : "";
+    if (!activeText) return; // যদি কোন লেটার না থাকে, তাহলে কিছু করবে না
+
+    clearTimeout(typingTimeout); // আগের টাইপিং টাইমআউট ক্লিয়ার করে দেবে
 
     letterEl.innerHTML = "";
     i = 0;
+    isTyping = true; // টাইপিং শুরু
     signature.style.opacity = 0;
     forever.style.opacity = 0;
     backBtn.style.display = "block";
@@ -84,12 +101,12 @@ function showLetter(n) {
 
 
 
-
 function typeWriter() {
     if (i < activeText.length) {
         letterEl.innerHTML += activeText.charAt(i++);
-        setTimeout(typeWriter, 28);
+        typingTimeout = setTimeout(typeWriter, 28);
     } else {
+        isTyping = false; // টাইপিং শেষ
         signature.style.opacity = 1;
         setTimeout(() => (forever.style.opacity = 1), 600);
         confetti();
@@ -97,13 +114,14 @@ function typeWriter() {
 }
 
 function resetPage() {
+    clearTimeout(typingTimeout);
+    isTyping = false;
     letterEl.innerHTML = "";
     signature.style.opacity = 0;
     forever.style.opacity = 0;
     backBtn.style.display = "none";
 
-    document.getElementById("letterMenu").style.display = "none";
-    document.getElementById("musicMenu").style.display = "none";
+    document.getElementById("letterMenu").style.display = "block";
 }
 
 // ===== Background Slideshow =====
@@ -158,7 +176,7 @@ function updateCountdown() {
         month8Btn.classList.remove("locked");
         month8Btn.classList.add("unlocked");
         month8Btn.innerText = "💝 8 Months Anniversary";
-        month8Btn.onclick = () => showLetter(1); // Adjust if needed
+        month8Btn.onclick = () => showLetter(5); // Adjust if needed
     }
 
     document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -172,22 +190,67 @@ updateCountdown();
 
 
 
+// গান প্লে/পজ করার মেইন ফাংশন
+function toggleMusic() {
+    const icon = document.getElementById("musicIcon");
+
+    if (music.paused) {
+        if (!music.src || music.src === window.location.href + "gaan.mp3") {
+            music.src = "gaan.mp3";
+        }
+        music.play().catch(e => console.log("Music play error:", e));
+        icon.innerText = "🎵";
+        document.getElementById("musicToggle").style.background = "rgba(0, 200, 150, 0.8)";
+    } else {
+        music.pause();
+        icon.innerText = "🔇";
+        document.getElementById("musicToggle").style.background = "rgba(255, 82, 82, 0.8)";
+
+    }
+}
+
+
+
 // গান প্লে লজিক
 function playSong(src, btn) {
-    if (!music.paused) music.pause();
     music.src = src;
-    music.play();
-    if (currentSongBtn) currentSongBtn.classList.remove("active");
-    btn.classList.add("active");
+    music.load();
+    music.play().then(() => {
+        document.getElementById("musicIcon").innerText = "🎵";
+        document.getElementById("musicToggle").style.background = "rgba(0, 200, 150, 0.8)";
+    }).catch(e => console.log("Music play error:", e));
+
+
+    if (currentSongBtn) currentSongBtn.style.background = "rgba(255, 255, 255, 0.15)";
+    btn.style.background = "#00c896";
     currentSongBtn = btn;
 }
 
+
+
 window.addEventListener("click", () => {
-    if (music && music.paused && !music.src) {
+    if (music && music.paused && (!music.src || music.src === window.location.href)) {
         music.src = "gaan.mp3";
-        music.play().catch(() => { });
+        music.play().then(() => {
+            document.getElementById("musicIcon").innerText = "🎵";
+        }).catch(() => { });
+
     }
 }, { once: true });
+
+
+
+setInterval(() => {
+    const heart = document.createElement("span");
+    heart.innerText = ["💖", "💚", "💕"][Math.floor(Math.random() * 3)];
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.fontSize = (12 + Math.random() * 12) + "px";
+
+    document.querySelector(".heart-rain").appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 700);
+
 
 
 
